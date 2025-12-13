@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meta Ads Manager – Business connections mock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f3f4fb;
+      --card-bg: #ffffff;
+      --border: #d3d8e4;
+      --text-main: #1c1e21;
+      --text-sub: #606770;
+      --accent: #1877f2;
+      --accent-soft: #e7f0ff;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.04);
+      --line: #ccd1e0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #fdfbff, #eef1ff);
+      color: var(--text-main);
+    }
+
+    .app {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* 左のサイドナビ（簡易） */
+    .sidebar {
+      width: 64px;
+      background: rgba(255, 255, 255, 0.8);
+      border-right: 1px solid #e0e3ee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      gap: 16px;
+    }
+
+    .sidebar-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid #d0d4e0;
+      background: #ffffff;
+    }
+
+    .sidebar-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #ff4d4f;
+      margin-left: auto;
+      margin-right: 8px;
+      margin-bottom: -6px;
+    }
+
+    /* メイン領域 */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 40px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .account-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #d3d8e4;
+      background: #fff;
+      font-size: 13px;
+    }
+
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: #d0e2ff;
+    }
+
+    .chevron {
+      border: solid #606770;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 3px;
+      transform: rotate(45deg);
+      margin-top: -2px;
+    }
+
+    /* カード共通 */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #d3d8e4;
+      background: #f6f7fb;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #757b8a;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 16px;
+      max-width: 520px;
+    }
+
+    /* Business connections カード固有 */
+    .card-body {
+      display: flex;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .tree-column {
+      flex: 2;
+      border-radius: var(--radius-md);
+      background: #f8f9ff;
+      border: 1px dashed #d2d8ee;
+      padding: 16px 16px 20px;
+      overflow: auto;
+    }
+
+    .info-column {
+      flex: 1.4;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .info-text {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    .info-list {
+      margin-top: 8px;
+      padding-left: 16px;
+    }
+
+    .info-list li {
+      margin-bottom: 4px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #0f62e6;
+    }
+
+    .help-link {
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .help-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ツリー図（簡易） */
+
+    .tree {
+      list-style: none;
+      position: relative;
+      padding-left: 0;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    .tree > li {
+      position: relative;
+      padding-left: 0;
+    }
+
+    .node {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      white-space: nowrap;
+    }
+
+    .node-label {
+      font-weight: 500;
+    }
+
+    .node-sub {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .node-portfolio {
+      background: linear-gradient(135deg, #f6f0ff, #e7f0ff);
+    }
+
+    .node-ad {
+      margin-top: 16px;
+    }
+
+    .node-pill {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #2851a3;
+      border: 1px solid #c3d4ff;
+    }
+
+    .tree-branch {
+      margin-left: 40px;
+      padding-left: 16px;
+      border-left: 1px solid var(--line);
+      position: relative;
+    }
+
+    .tree-branch::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: 18px;
+      width: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .assets-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+      margin-left: 40px;
+      position: relative;
+    }
+
+    .assets-row::before {
+      content: "";
+      position: absolute;
+      left: -24px;
+      top: 18px;
+      width: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .asset-node {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 11px;
+    }
+
+    .asset-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid #d4d9ea;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    .status {
+      font-size: 10px;
+      margin-left: 4px;
+    }
+
+    .status.ok {
+      color: #0d8a3a;
+    }
+    .status.warn {
+      color: #e08a00;
+    }
+    .status.none {
+      color: #9fa4b8;
+    }
+
+    .legend {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .legend span::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    .legend-ok::before {
+      background: #0d8a3a;
+    }
+    .legend-warn::before {
+      background: #e08a00;
+    }
+    .legend-none::before {
+      background: #9fa4b8;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .main {
+        padding: 16px;
+      }
+      .card-body {
+        flex-direction: column;
+      }
+      .tree-column {
+        max-height: 260px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .app {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: 56px;
+        flex-direction: row;
+        justify-content: center;
+        border-right: none;
+        border-bottom: 1px solid #e0e3ee;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-hidden="true">
+      <div class="sidebar-circle"></div>
+      <div class="sidebar-circle"></div>
+      <div class="sidebar-circle"></div>
+      <div class="sidebar-circle"></div>
+      <div class="sidebar-circle"></div>
+    </aside>
+
+    <main class="main">
+      <header>
+        <h1>Account Overview</h1>
+        <div class="account-pill">
+          <div class="avatar"></div>
+          <span>Personal Account · Demo</span>
+          <i class="chevron"></i>
+        </div>
+      </header>
+
+      <!-- Business connections card -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">Business connections</div>
+          <div class="badge">Preview</div>
+        </div>
+        <p class="card-subtitle">
+          See which Business Portfolio, ad account and assets are connected to
+          this account at a glance.
+        </p>
+
+        <div class="card-body">
+          <!-- 左：ツリー図 -->
+          <div class="tree-column">
+            <ul class="tree">
+              <li>
+                <div class="node node-portfolio">
+                  <span class="node-label">Business Portfolio: Aurora Studio</span>
+                  <span class="node-sub">3 ad accounts · 8 assets</span>
+                </div>
+
+                <div class="tree-branch">
+                  <div class="node node-ad">
+                    <span class="node-label">Ad Account: Aurora Main</span>
+                    <span class="node-sub">ID: 1234-5678</span>
+                    <span class="node-pill">Current account</span>
+                  </div>
+                </div>
+
+                <div class="assets-row">
+                  <div class="asset-node">
+                    <span class="asset-icon">F</span>
+                    <span>FB Page: Aurora Studio</span>
+                    <span class="status ok">● Connected</span>
+                  </div>
+
+                  <div class="asset-node">
+                    <span class="asset-icon">IG</span>
+                    <span>IG: @aurora_studio</span>
+                    <span class="status ok">● Connected</span>
+                  </div>
+
+                  <div class="asset-node">
+                    <span class="asset-icon">&lt;/&gt;</span>
+                    <span>Pixel: Aurora Pixel</span>
+                    <span class="status ok">● Active</span>
+                  </div>
+
+                  <div class="asset-node">
+                    <span class="asset-icon">CAT</span>
+                    <span>Catalog: Aurora Products</span>
+                    <span class="status warn">● Needs attention</span>
+                  </div>
+
+                  <div class="asset-node">
+                    <span class="asset-icon">COM</span>
+                    <span>Commerce Account: Aurora Shop</span>
+                    <span class="status none">● Not connected</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <div class="legend">
+              <span class="legend-ok">Connected / Active</span>
+              <span class="legend-warn">Needs attention</span>
+              <span class="legend-none">Not connected</span>
+            </div>
+          </div>
+
+          <!-- 右：説明とCTA -->
+          <div class="info-column">
+            <div>
+              <p class="info-text">
+                This view helps you understand how your current ad account fits
+                inside your Business Portfolio and which assets it uses.
+              </p>
+              <ul class="info-list info-text">
+                <li>Check if the right Page and IG account are attached.</li>
+                <li>Confirm which Pixel and Catalog this account is using.</li>
+                <li>Quickly spot assets that need attention.</li>
+              </ul>
+            </div>
+
+            <div>
+              <button class="btn-primary" type="button">
+                View all connections
+              </button>
+              <div style="margin-top: 8px;">
+                <a href="#" class="help-link">How to read this diagram</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ここに本来の Opportunity score カードなどを続けて配置できます -->
+    </main>
+  </div>
+</body>
+</html>
