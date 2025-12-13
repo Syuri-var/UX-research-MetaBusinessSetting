@@ -1635,13 +1635,305 @@
         </div>
       </section>
 
-      <!-- Note: Remaining sections follow similar pattern with Japanese content -->
-      <!-- The full Japanese version would continue with all sections translated -->
+      <!-- Principles (Japanese) -->
+      <section>
+        <div class="section-label">デザイン原則</div>
+        <h2>混乱を「見える化」と「ガイド」に変える 3 つの原則。</h2>
+        <p class="section-intro">
+          単に UI をきれいにするだけでは不十分でした。
+          ユーザーがシステムをどう理解し、どう移動するかという「メンタルモデル」そのものを
+          変える必要があります。そこで次の 3 つを原則としました。
+        </p>
+
+        <div class="principles-row">
+          <div class="card">
+            <div class="principle-title">1. 見えない階層を可視化する</div>
+            <div class="before-after">
+              <span class="before-label">Before</span>
+              <span>アセット同士の関係を、ユーザーが頭の中だけで想像するしかありませんでした。</span>
+              <span class="after-label">After</span>
+              <span>ビジネスツリー図によって、ビジネス／広告アカウント／アセットの関係性を一目で把握できるようにしました。</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="principle-title">2. 問題解決の道筋をガイドする</div>
+            <div class="before-after">
+              <span class="before-label">Before</span>
+              <span>どこから手をつければよいか分からず、複数のツールやタブを行き来していました。</span>
+              <span class="after-label">After</span>
+              <span>ステップごとの診断フローで、あいまいなエラーを「順番に解決できるタスクリスト」に変換しました。</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="principle-title">3. 行き止まりのエラーをなくす</div>
+            <div class="before-after">
+              <span class="before-label">Before</span>
+              <span>「権限がありません」のようなメッセージだけで、次に何をすれば良いか分かりませんでした。</span>
+              <span class="after-label">After</span>
+              <span>すべてのエラーステートに「Fix（解決）」アクションを付与し、ブロッカーをそのままタスクに変えました。</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Transformation (Japanese) -->
+      <section>
+        <div class="section-label">変化</div>
+        <h2>「ごちゃごちゃしたダッシュボード」から「地図とチェックリスト」へ。</h2>
+        <p class="section-intro">
+          以前のダッシュボードは、レコメンデーションや数値は出るものの、
+          アセット同士がどうつながっているかはほとんど示していませんでした。
+          新しいビューでは、セットアップ全体を「地図」と「チェックリスト」として再定義しました。
+        </p>
+
+        <div class="ba-row">
+          <div class="card ba-panel">
+            <div class="ba-tag">Before</div>
+            <h4>断片的なオーバービュー</h4>
+            <p style="font-size:13px; color:var(--text-sub);">
+              アセットの状態は複数のツールに分散しており、
+              どのビジネスポートフォリオ・広告アカウント・ページ・ピクセル・カタログが
+              セットで動いているのかを、一箇所で確認することができませんでした。
+            </p>
+          </div>
+          <div class="card ba-panel">
+            <div class="ba-tag after">After</div>
+            <h4>Business connections map（接続マップ）</h4>
+            <ul>
+              <li><strong>ツリービュー</strong>で、ビジネスポートフォリオ・現在の広告アカウント・紐づくアセットの関係を一望できます。</li>
+              <li><strong>「Fix」フロー</strong>により、複数のエラーを 1 つの入口から優先度付きチェックリストとして解決できます。</li>
+              <li><strong>平易なステータス表現</strong>で、「Ready」「Needs attention」「Not connected」のように状況が直感的に分かります。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Confidence (Japanese) -->
+      <section>
+        <div class="section-label">Confidence</div>
+        <h2>「完了させる」だけでなく、「安心して進められる」状態をデザインする。</h2>
+        <p class="section-intro">
+          テストを通じて分かったのは、ユーザーは「分からない」だけでなく、
+          <em>取り返しのつかないミスをするのが怖い</em> という心理的ハードルを強く感じていることでした。
+          これを解消するために、新しい安全装置を検討しました。
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="eyebrow">Sandbox（サンドボックス）の必要性</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              多くの参加者が、「本番に反映されない安全な環境で試したい」と語りました。
+              そこで、実アカウントを複製した「シミュレーションモード」のコンセプトを検討しました。
+            </p>
+            <ul>
+              <li>実環境とほぼ同じ画面だが、明確に「Simulation」とラベル表示。</li>
+              <li>さまざまなアセットの組み合わせを、本番に影響を与えず試すことができます。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="eyebrow">Undo を一級機能として扱う</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              「後戻りできないかもしれない」という不安を減らすため、
+              サンドボックスに加えて、時間制限付きの Undo 機能をペアで検討しました。
+            </p>
+            <ul>
+              <li>「この変更は 24 時間以内であれば元に戻せます」といった明確なメッセージ。</li>
+              <li>最近行われたアセット接続を、システムレベルでロールバックできる仕組み。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results (Japanese) -->
+      <section>
+        <div class="section-label">成果</div>
+        <h2>ユーザーの成功体験は、数字にもはっきり表れた。</h2>
+        <p class="section-intro">
+          リデザイン後のユーザビリティテストでは、初期テストとは真逆の結果が得られました。
+          ユーザーはタスクを完了できるだけでなく、短時間かつ自信を持って操作できるようになりました。
+        </p>
+
+        <div class="results-grid">
+          <div class="result-block">
+            <div class="result-label">指標 1：タスク完了率</div>
+            <div class="result-before-after">
+              <span class="before-value">25%（2/6）</span>
+              <span style="font-size:11px; color:#9ca3af;">→</span>
+              <span class="after-value">100%（6/6）</span>
+            </div>
+            <div class="result-note">
+              4 倍の改善：すべての参加者が、技術的なセットアップタスクを完了できました。
+            </div>
+          </div>
+          <div class="result-block">
+            <div class="result-label">指標 2：平均完了時間</div>
+            <div class="result-before-after">
+              <span class="before-value">約 48 分</span>
+              <span style="font-size:11px; color:#9ca3af;">→</span>
+              <span class="after-value">約 12 分</span>
+            </div>
+            <div class="result-note">
+              75% の短縮：ほぼ 1 時間かかっていたフローが、15 分以内で完了できるようになりました。
+            </div>
+          </div>
+          <div class="result-block">
+            <div class="result-label">指標 3：ナビゲーションの迷い</div>
+            <div class="result-before-after">
+              <span class="before-value">100%</span>
+              <span style="font-size:11px; color:#9ca3af;">→</span>
+              <span class="after-value">0%</span>
+            </div>
+            <div class="result-note">
+              「どこにいるか分からない」という発言は、リデザイン後のテストでは一度も出ませんでした。
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px;">
+          <div class="eyebrow">Clarity は Growth につながる</div>
+          <p style="font-size:13px; color:var(--text-sub);">
+            セットアップの障壁と計測の問題が解消されると、UX の改善はそのまま
+            すべてのセグメントでの広告投資の増加につながりました。
+          </p>
+
+          <table class="impact-table">
+            <thead>
+              <tr>
+                <th>ユーザーグループ</th>
+                <th>Before</th>
+                <th>After</th>
+                <th>Growth</th>
+                <th>主なドライバー</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ターゲット（スタートアップ）</td>
+                <td>¥0.45M</td>
+                <td>¥1.5M</td>
+                <td class="impact-growth">3.3×</td>
+                <td>セットアップ障壁の解消。</td>
+              </tr>
+              <tr>
+                <td>中級（B2B / SaaS）</td>
+                <td>¥0.5M</td>
+                <td>¥1.0M</td>
+                <td class="impact-growth">2.0×</td>
+                <td>計測まわりの不具合解消。</td>
+              </tr>
+              <tr>
+                <td>代理店（エキスパート）</td>
+                <td>¥13.0M</td>
+                <td>¥15.6M</td>
+                <td class="impact-growth">1.2×</td>
+                <td>管理ツールの効率向上。</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>¥14.0M</strong></td>
+                <td><strong>¥18.1M</strong></td>
+                <td class="impact-growth">+30%</td>
+                <td>すべてのセグメントでの改善の合計。</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top:8px; font-size:12px; color:var(--accent-green);">
+            広告費のトータルは
+            <span class="badge-pill">+30%</span>
+            増加しました。
+          </div>
+        </div>
+      </section>
+
+      <!-- Lessons & Future (Japanese) -->
+      <section>
+        <div class="section-label">振り返り</div>
+        <h2>複雑なプロダクトから学んだことと、今後の余地。</h2>
+        <p class="section-intro">
+          目先の数値だけでなく、「複雑なシステムをどうデザインするか」という、より大きな学びもありました。
+        </p>
+
+        <div class="lessons-row">
+          <div class="lesson">
+            <div class="lesson-number">1</div>
+            <div class="lesson-title">用語の難しさは、常に残り続ける。</div>
+            <p>
+              UI が分かりやすくなっても、「アセット」「カタログ」といった Meta 固有の言葉は
+              依然としてハードルになっていました。情報設計とライティングを一体で考える必要があります。
+            </p>
+          </div>
+          <div class="lesson">
+            <div class="lesson-number">2</div>
+            <div class="lesson-title">「戻れないかもしれない」という恐怖は本物。</div>
+            <p>
+              フローが理解しやすくなっても、ユーザーの不安はすぐには消えません。
+              真の意味で「安心して進められる」体験をつくるには、この恐怖を前提として設計する必要があります。
+            </p>
+          </div>
+          <div class="lesson">
+            <div class="lesson-number">3</div>
+            <div class="lesson-title">レガシーケースを扱えるセルフサービスが必要。</div>
+            <p>
+              複雑な過去設定を抱えたユーザーは、依然として人によるサポートを必要としました。
+              これは「移行シナリオ」をセルフサービスでどう扱うか、という今後の課題も示しています。
+            </p>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-top:22px;">
+          <div class="card">
+            <div class="eyebrow">バックエンド改善の提案</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              手動対応に頼り切らないために、システム側から「アカウント衛生」のアクションを提案する仕組みが考えられます。
+              例：長期間使われていないアセットの自動アーカイブや、
+              管理者不在時の「所有権リクエスト」フローなど。
+            </p>
+          </div>
+          <div class="card">
+            <div class="eyebrow">本格的なサンドボックス設計</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              Meta ツールの中で、移行後の状態を安全にシミュレーションできるようにすることで、
+              ユーザーの自信をさらに高めることができます。
+              強力な Undo と組み合わせたフルサンドボックス環境は、
+              「安心して試せる」体験の重要なピースです。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outro (Japanese) -->
+      <section class="outro">
+        <div>
+          <h3>迷路から、打ち上げ台へ。</h3>
+          <p>
+            複雑さをほどき、「自信」をデザインすることで、
+            これまでのボトルネックだったセットアップ画面を、
+            成長のスタート地点に変えることができました。
+            ユーザーの「分かりやすさ」への投資は、そのままプロダクトの成功への投資であると実感したプロジェクトです。
+          </p>
+          <div class="rocket-line">
+            <div class="rocket"></div>
+          </div>
+        </div>
+        <div>
+          <p class="outro-links">
+            📧 お問い合わせ：<em>[ご自身のメールアドレス]</em><br />
+            💼 LinkedIn：<em>[linkedin.com/in/your-profile]</em><br />
+            🌐 ポートフォリオ：<em>[your-portfolio-url.com]</em>
+          </p>
+          <p class="outro-links" style="margin-top:10px;">
+            この HTML は、ポートフォリオ用に PDF として書き出して使えるように設計しています。
+          </p>
+        </div>
+      </section>
 
     </div>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const btnEn = document.getElementById('btn-en');
     const btnJa = document.getElementById('btn-ja');
     const langEn = document.getElementById('lang-en');
@@ -1651,13 +1943,13 @@
       if (lang === 'en') {
         btnEn.classList.add('active');
         btnJa.classList.remove('active');
-        langEn.style.display = '';
+        langEn.style.display = 'block';
         langJa.style.display = 'none';
         document.documentElement.lang = 'en';
       } else {
         btnJa.classList.add('active');
         btnEn.classList.remove('active');
-        langJa.style.display = '';
+        langJa.style.display = 'block';
         langEn.style.display = 'none';
         document.documentElement.lang = 'ja';
       }
