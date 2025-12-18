@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meta Ads Manager UX Case Study – EN / 日本語</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f7f4ee;
+      --bg-alt: #ffffff;
+      --bg-soft: #f1f4fb;
+      --border: #dde1ec;
+      --text-main: #1c1e21;
+      --text-sub: #606770;
+      --accent-blue: #0054b4;
+      --accent-green: #16a34a;
+      --accent-orange: #e5862f;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 6px 20px rgba(0,0,0,0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #fdfaf4, #f1f3fb);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 24px auto 40px;
+      padding: 0 20px 40px;
+    }
+
+    /* Top bar with language toggle */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .top-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent-blue);
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      border-radius: 999px;
+      border: 1px solid #d0d4e0;
+      overflow: hidden;
+      font-size: 13px;
+      background: #fff;
+    }
+
+    .lang-toggle button {
+      padding: 6px 14px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .lang-toggle button.active {
+      background: var(--accent-blue);
+      color: #fff;
+    }
+
+    /* Hero */
+    header.hero {
+      background: var(--bg-alt);
+      border-radius: 28px;
+      padding: 32px 32px 28px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr);
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      line-height: 1.2;
+      color: var(--accent-blue);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      max-width: 420px;
+      color: var(--text-sub);
+      margin-bottom: 18px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #e0e2ef;
+      background: #f7f8fd;
+      color: var(--text-sub);
+    }
+
+    .hero-meta {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .hero-meta span + span::before {
+      content: "•";
+      margin: 0 6px;
+      color: #c1c5d3;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .knot {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(245,180,92,0.2), transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(56,189,148,0.2), transparent 60%),
+        #fffaf3;
+      border: 2px solid #f3e0c7;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .knot-line {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 3px dashed rgba(229,134,47,0.7);
+      top: -40px;
+      left: -40px;
+      transform: rotate(-12deg);
+    }
+
+    .knot-line:nth-child(2) {
+      border-style: solid;
+      border-color: rgba(22,163,74,0.55);
+      width: 220px;
+      height: 220px;
+      top: -20px;
+      left: -10px;
+      transform: rotate(24deg);
+    }
+
+    .knot-label {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .hero-curve {
+      position: absolute;
+      bottom: -6px;
+      left: -12px;
+      right: -12px;
+      height: 24px;
+      background: linear-gradient(
+        90deg,
+        var(--accent-orange),
+        #d8b653,
+        var(--accent-green)
+      );
+      border-radius: 999px;
+      opacity: 0.5;
+      filter: blur(6px);
+    }
+
+    /* Sections */
+    section {
+      margin-top: 32px;
+    }
+
+    .section-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent-blue);
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .section-intro {
+      font-size: 14px;
+      color: var(--text-sub);
+      max-width: 720px;
+    }
+
+    /* Layout helpers */
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.4fr);
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card-soft {
+      background: var(--bg-soft);
+      border-style: dashed;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-blue);
+      margin-bottom: 4px;
+    }
+
+    .persona-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .persona-role {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 12px;
+    }
+
+    .list-header {
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+
+    ul {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-left: 18px;
+      margin-bottom: 4px;
+    }
+
+    li {
+      margin-bottom: 3px;
+    }
+
+    .quote {
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .quote strong {
+      color: var(--accent-orange);
+      font-weight: 700;
+    }
+
+    /* Metrics */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .metric {
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      padding: 12px 12px 10px;
+      border: 1px solid #e2e5f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-size: 12px;
+    }
+
+    .metric-label {
+      color: var(--text-sub);
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 2px;
+      color: var(--accent-blue);
+    }
+
+    .metric-note {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    /* Pain map */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .pain-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    /* Process */
+    .process-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .process-step {
+      background: var(--bg-alt);
+      border-radius: 999px;
+      padding: 10px 14px;
+      border: 1px solid #dde0ef;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #f1f4ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--accent-blue);
+    }
+
+    .process-step strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    /* Design principles */
+    .principles-row {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .principle-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .before-after {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .before-after span {
+      display: block;
+    }
+
+    .before-label {
+      color: #b45309;
+      font-weight: 600;
+    }
+
+    .after-label {
+      color: var(--accent-green);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* Before / after panel */
+    .ba-row {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) minmax(0,1.1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .ba-panel h4 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .ba-tag {
+      display: inline-block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #e4d4c4;
+      color: #b45309;
+      margin-bottom: 6px;
+    }
+
+    .ba-tag.after {
+      border-color: #c4e3ce;
+      color: var(--accent-green);
+    }
+
+    /* Results */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .result-block {
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      padding: 12px 12px 10px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+    }
+
+    .result-label {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 4px;
+    }
+
+    .result-before-after {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .before-value {
+      color: #ea580c;
+      font-weight: 600;
+    }
+
+    .after-value {
+      color: var(--accent-green);
+      font-weight: 600;
+    }
+
+    .result-note {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .impact-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 12px;
+    }
+
+    .impact-table th,
+    .impact-table td {
+      border: 1px solid #e2e5f0;
+      padding: 6px 8px;
+    }
+
+    .impact-table th {
+      background: #f7f8fd;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .impact-growth {
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #e6f6eb;
+      color: var(--accent-green);
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid #c5e8cf;
+      margin-left: 6px;
+    }
+
+    /* Lessons */
+    .lessons-row {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .lesson {
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      padding: 14px 12px 12px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+    }
+
+    .lesson-number {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: #f1f4ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--accent-blue);
+      margin-bottom: 6px;
+    }
+
+    .lesson-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    /* Outro */
+    .outro {
+      margin-top: 32px;
+      background: var(--bg-alt);
+      border-radius: 24px;
+      padding: 20px 22px;
+      border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .outro h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: var(--accent-blue);
+    }
+
+    .outro p {
+      font-size: 14px;
+      color: var(--text-sub);
+    }
+
+    .rocket-line {
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+      border-radius: 999px;
+      margin-top: 12px;
+      position: relative;
+    }
+
+    .rocket {
+      position: absolute;
+      right: 0;
+      top: -8px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50% 50% 50% 0;
+      border: 2px solid var(--accent-green);
+      transform: rotate(45deg);
+    }
+
+    .rocket::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-green);
+      border-color: transparent transparent var(--accent-green) var(--accent-green);
+      left: 3px;
+      top: 3px;
+    }
+
+    .outro-links {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: 8px;
+    }
+
+    /* User flow diagram */
+    .flow-diagram {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      border: 1px solid var(--border);
+      margin-top: 18px;
+      overflow-x: auto;
+    }
+
+    .flow-diagram img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* Interactive mockup section */
+    .mockup-section {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      border: 1px solid var(--border);
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .mockup-demo {
+      margin: 20px 0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .mockup-demo img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-blue);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(0,84,180,0.2);
+    }
+
+    .cta-button:hover {
+      background: #003d8f;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,84,180,0.3);
+    }
+
+    .cta-button svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .figma-link {
+      display: inline-block;
+      margin-top: 12px;
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-size: 13px;
+      border-bottom: 1px dashed var(--accent-blue);
+    }
+
+    .figma-link:hover {
+      border-bottom-style: solid;
+    }
+
+    /* Language visibility */
+    #lang-ja { display: none; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      header.hero {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .hero-visual {
+        order: -1;
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .two-col,
+      .ba-row,
+      .results-grid,
+      .lessons-row,
+      .principles-row,
+      .process-row,
+      .metrics-row,
+      .pain-grid,
+      .outro {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .metrics-row {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+      .process-row {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+      .principles-row {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .results-grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+
+  .hero-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  </style>
+</head>
+<body>
+  <body>
+  <p style="font-size:12px; color:#666; text-align:center; margin:8px 0;">
+    Note: All user data in this case study is fictional / 本ケーススタディのユーザーデータはすべて架空のものです。
+  </p>
+  <div class="page">
+    <!-- 以下、元の内容 -->
+
+  <div class="page">
+    <!-- top bar -->
+    <div class="top-bar">
+      <div class="top-title">Meta Ads Manager – UX Case Study</div>
+      <div class="lang-toggle">
+        <button id="btn-en" class="active" type="button">EN</button>
+        <button id="btn-ja" type="button">日本語</button>
+      </div>
+    </div>
+
+    <!-- ========== ENGLISH VERSION ========== -->
+    <div id="lang-en">
+      <!-- Hero -->
+      <header class="hero">
+        <div>
+          <div class="hero-title">
+            Untangling the Knot: A UX Case Study for Meta Ads Manager
+          </div>
+          <div class="hero-subtitle">
+            Guiding users from confusion to clarity in business asset management.
+          </div>
+
+          <div class="hero-tags">
+            <span class="tag">Meta Ads Manager</span>
+            <span class="tag">Business Asset Setup</span>
+            <span class="tag">UX Case Study</span>
+          </div>
+
+          <div class="hero-meta">
+            <span>Role: UX Designer &amp; Researcher</span>
+            <span>Focus: Business setup &amp; confidence</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+  <img src="from-knot-to-clear-path.png" alt="From knot to clear path visualization" class="hero-image">
+</div>
+      </header>
+
+      <!-- Interactive Mockup Section -->
+      <section>
+        <div class="section-label">Interactive Prototype</div>
+        <h2>Experience the improved interface</h2>
+        <p class="section-intro">
+          Try the redesigned Meta Ads Manager interface that addresses the core pain points identified in our research.
+          The prototype demonstrates the new account hierarchy visualization, guided setup flow, and improved asset management.
+        </p>
+
+        <div class="mockup-section">
+          <div class="mockup-demo">
+            <img src="meta_case_study_anime.gif" alt="Meta Ads Manager Redesign Demo" />
+          </div>
+          
+          <p style="font-size: 14px; color: var(--text-sub); margin-bottom: 16px;">
+            👆 Watch how the new design simplifies the business asset connection process
+          </p>
+
+          <a href="https://grant-heave-65328644.figma.site" target="_blank" class="cta-button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+            </svg>
+            Try Interactive Prototype
+          </a>
+
+          <br/>
+          <p style="font-size: 12px; color: var(--text-sub); margin-top: 12px;">
+            💡 This is an interactive prototype demonstrating the improved user flow
+          </p>
+        </div>
+      </section>
+
+      <!-- Problem -->
+      <section>
+        <div class="section-label">Problem</div>
+        <h2>For marketers, the path to running ads feels like a maze.</h2>
+        <p class="section-intro">
+          Creating an ad in Meta Ads Manager is relatively straightforward. Getting to that point is not.
+          The way Business Portfolios, Ad Accounts, Pages, Pixels and Catalogs connect is opaque, and this
+          hidden structure becomes a very visible source of stress. Intermediate users were stalling out
+          before they ever reached the campaign screen.
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="eyebrow">Persona</div>
+            <div class="persona-name">Meet Hana, a driven entrepreneur stalled by complexity.</div>
+            <div class="persona-role">Small business owner running a select shop with Shopify.</div>
+
+            <p class="list-header">Goal</p>
+            <ul>
+              <li>Correctly link her Shopify product catalog to Facebook and Instagram.</li>
+              <li>Attach the right Page, accounts and a working Pixel to run effective ads.</li>
+            </ul>
+
+            <p class="list-header">Core frustration</p>
+            <p class="quote">
+              <strong>"I just want to run ads."</strong> She feels lost in a sea of settings and is afraid of
+              clicking something irreversible. Help Center articles do not match her specific situation.
+            </p>
+          </div>
+
+          <div>
+            <div class="card card-soft">
+              <div class="eyebrow">Initial usability test (6 participants)</div>
+              <p style="font-size:13px; color:var(--text-sub);">
+                We ran a moderated remote usability study with intermediate-level users tasked with
+                connecting business assets and completing a basic setup.
+              </p>
+
+              <div class="metrics-row">
+                <div class="metric">
+                  <div class="metric-label">Task success rate</div>
+                  <div class="metric-value">25%</div>
+                  <div class="metric-note">Only 2 of 6 users could complete the core setup tasks.</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">Avg. time on task</div>
+                  <div class="metric-value">~48 min</div>
+                  <div class="metric-note">Workflows intended to take 10–15 minutes stretched to almost an hour.</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">Navigation confusion</div>
+                  <div class="metric-value">100%</div>
+                  <div class="metric-note">Every participant got lost or stuck due to unclear navigation.</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">SUS score</div>
+                  <div class="metric-value">30–40</div>
+                  <div class="metric-note">The experience was consistently described as "painful".</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pain map -->
+      <section>
+        <div class="section-label">Pain points</div>
+        <h2>The invisible structure was creating very visible pain.</h2>
+        <p class="section-intro">
+          Research showed that most of the friction came from how users <em>understood</em> the system—not from
+          campaign creation itself. Four recurring pain themes emerged:
+        </p>
+
+        <div class="pain-grid">
+          <div class="card">
+            <div class="pain-title">Confusing hierarchy</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              Users could not clearly explain the difference between a Business Manager / Portfolio and an Ad
+              Account. They weren't sure which layer to adjust when something went wrong.
+            </p>
+          </div>
+          <div class="card">
+            <div class="pain-title">Opaque asset linking</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              It was difficult to see which Page, Pixel, Catalog or Instagram account was connected to which
+              business. Errors like "This Page is owned by another business" came as a surprise.
+            </p>
+          </div>
+          <div class="card">
+            <div class="pain-title">Complex permissions</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              Simple actions, such as adding a partner or designer, took many clicks across multiple screens.
+              People were unsure whether they had given "too much" or "too little" access.
+            </p>
+          </div>
+          <div class="card">
+            <div class="pain-title">Fear of irreversible actions</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              Many users believed that once they connected an asset, it could never be undone.
+              This fear caused hesitation and abandoned sessions at critical decision points.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- User Flow Diagram -->
+      <section>
+        <div class="section-label">User Flow</div>
+        <h2>Redesigned flow: From login to campaign launch</h2>
+        <p class="section-intro">
+          The new user flow addresses pain points at each stage, with particular focus on two-factor authentication improvements
+          (including authenticator app recommendations), clear business portfolio selection with visible ad account connections,
+          and streamlined asset verification.
+        </p>
+
+        <div class="flow-diagram">
+          <h3 style="text-align: center; margin-bottom: 16px; color: var(--accent-blue);">Complete User Journey Map</h3>
+          <p style="text-align: center; font-size: 13px; color: var(--text-sub); margin-bottom: 20px;">
+            From 2FA to Advantage+ Shopping Campaign creation with Shopify integration
+          </p>
+          
+          <!-- Simplified visual representation -->
+          <div style="background: #f8f9fc; padding: 24px; border-radius: 12px; border: 2px dashed var(--border);">
+            <div style="display: flex; flex-direction: column; gap: 16px; max-width: 900px; margin: 0 auto;">
+              
+              <!-- Stage 1 -->
+              <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-blue);">
+                <strong style="color: var(--accent-blue);">Stage 1: Authentication</strong>
+                <p style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">
+                  Login → 2FA (SMS/Email/Authenticator App) → <span style="color: var(--accent-green); font-weight: 600;">✓ Authenticated</span>
+                </p>
+                <p style="font-size: 11px; color: var(--accent-orange); margin-top: 4px;">
+                  ⭐ Key improvement: Authenticator app recommended for reliability
+                </p>
+              </div>
+
+              <!-- Stage 2 -->
+              <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-blue);">
+                <strong style="color: var(--accent-blue);">Stage 2: Business Selection</strong>
+                <p style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">
+                  View businesses → See connected ad accounts & IDs → Select business → <span style="color: var(--accent-green); font-weight: 600;">✓ Business selected</span>
+                </p>
+                <p style="font-size: 11px; color: var(--accent-orange); margin-top: 4px;">
+                  ⭐ Key improvement: Ad account details visible before selection
+                </p>
+              </div>
+
+              <!-- Stage 3 -->
+              <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-blue);">
+                <strong style="color: var(--accent-blue);">Stage 3: Asset Verification</strong>
+                <p style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">
+                  Check Pixel → Verify Instagram → Review Catalog → <span style="color: var(--accent-green); font-weight: 600;">✓ Assets ready</span>
+                </p>
+                <p style="font-size: 11px; color: var(--accent-orange); margin-top: 4px;">
+                  ⭐ Key improvement: Tree view shows asset relationships
+                </p>
+              </div>
+
+              <!-- Stage 4 -->
+              <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-blue);">
+                <strong style="color: var(--accent-blue);">Stage 4: Shopify Integration</strong>
+                <p style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">
+                  Install Meta app → Connect business → Sync catalog → <span style="color: var(--accent-green); font-weight: 600;">✓ Shopify connected</span>
+                </p>
+                <p style="font-size: 11px; color: var(--accent-orange); margin-top: 4px;">
+                  ⭐ Key improvement: Pre-flight checks prevent errors
+                </p>
+              </div>
+
+              <!-- Stage 5 -->
+              <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-green);">
+                <strong style="color: var(--accent-green);">Stage 5: Campaign Creation</strong>
+                <p style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">
+                  Create Advantage+ campaign → Set budget → Review → <span style="color: var(--accent-green); font-weight: 600;">🎉 Campaign launched!</span>
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <p style="text-align: center; font-size: 12px; color: var(--text-sub); margin-top: 16px;">
+            📊 <a href="user_flow_diagram.html" style="color: var(--accent-blue);" target="_blank">View detailed flowchart diagram</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- Process -->
+      <section>
+        <div class="section-label">Process</div>
+        <h2>From ambiguity to a validated solution through a user-centered process.</h2>
+        <p class="section-intro">
+          To address these issues, we followed a four-stage design process combining qualitative interviews,
+          usage data and iterative prototyping.
+        </p>
+
+        <div class="process-row">
+          <div class="process-step">
+            <div class="step-icon">1</div>
+            <div>
+              <strong>Research</strong>
+              <span>Online support interviews &amp; moderated usability tests to study behavior and screen flows.</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-icon">2</div>
+            <div>
+              <strong>Define</strong>
+              <span>Organized qualitative and quantitative data into pain themes, personas and key insights.</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-icon">3</div>
+            <div>
+              <strong>Design</strong>
+              <span>Explored improvements to information architecture and navigation via low-fidelity wires.</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-icon">4</div>
+            <div>
+              <strong>Validate</strong>
+              <span>Ran additional usability tests on the prototype to confirm improvements and surface edge cases.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Principles -->
+      <section>
+        <div class="section-label">Design Principles</div>
+        <h2>Three principles to turn confusion into clarity.</h2>
+        <p class="section-intro">
+          The solution needed to go beyond polishing the UI. It had to shift how people understood and navigated
+          the system itself. We anchored the redesign on three principles:
+        </p>
+
+        <div class="principles-row">
+          <div class="card">
+            <div class="principle-title">1. Visualize hidden hierarchies</div>
+            <div class="before-after">
+              <span class="before-label">Before</span>
+              <span>Users had to imagine how assets related to each other with almost no visual support.</span>
+              <span class="after-label">After</span>
+              <span>A tree view made business relationships visible, aligning with users' mental models.</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="principle-title">2. Provide guided diagnosis</div>
+            <div class="before-after">
+              <span class="before-label">Before</span>
+              <span>Users didn't know where to start and wandered across multiple tools and tabs.</span>
+              <span class="after-label">After</span>
+              <span>Step-by-step diagnostics turned vague errors into a clear, guided fix path.</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="principle-title">3. Eliminate dead-end errors</div>
+            <div class="before-after">
+              <span class="before-label">Before</span>
+              <span>Errors ended with cold warnings like "You do not have permission."</span>
+              <span class="after-label">After</span>
+              <span>Each error state included an actionable "Fix" option that converted blockers into tasks.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Transformation -->
+      <section>
+        <div class="section-label">Transformation</div>
+        <h2>From a cluttered dashboard to a clear map.</h2>
+        <p class="section-intro">
+          The previous dashboard surfaced recommendations and metrics, but did little to explain how assets
+          were connected. The redesigned view reframed setup as a map and checklist instead of a black box.
+        </p>
+
+        <div class="ba-row">
+          <div class="card ba-panel">
+            <div class="ba-tag">Before</div>
+            <h4>Fragmented overview</h4>
+            <p style="font-size:13px; color:var(--text-sub);">
+              Asset status was scattered across different tools. Users had no single place to see which
+              Business Portfolio, Ad Account, Page, Pixel and Catalog belonged together.
+            </p>
+          </div>
+          <div class="card ba-panel">
+            <div class="ba-tag after">After</div>
+            <h4>Business connections map</h4>
+            <ul>
+              <li><strong>Visual tree view</strong> shows the relationship between the Business Portfolio, the current Ad Account and all connected assets.</li>
+              <li><strong>Guided "Fix" flow</strong> converts setup errors into a prioritized checklist with one entry point.</li>
+              <li><strong>Plain-language status</strong> replaces jargon with understandable labels like "Ready", "Needs attention" or "Not connected".</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Confidence -->
+      <section>
+        <div class="section-label">Confidence</div>
+        <h2>Designing for confidence, not just completion.</h2>
+        <p class="section-intro">
+          A major insight from testing was that users were not only confused—they were
+          <em>afraid</em> of making irreversible mistakes. Addressing this psychological hurdle
+          required new safety mechanisms.
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="eyebrow">Need for a sandbox</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              Participants expressed a strong desire for a safe environment where they could simulate the effect of
+              connecting assets before committing changes to production.
+            </p>
+            <ul>
+              <li>Sandbox mode mirrors the real account but labels it clearly as "simulation".</li>
+              <li>Users can explore different asset pairings without impacting live campaigns.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="eyebrow">Undo as a first-class feature</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              To reduce anxiety around permanent decisions, we paired sandboxing with a time-boxed "undo"
+              window. This shifted the experience from "If I click this, I'm stuck" to
+              "I can try this and revert if needed".
+            </p>
+            <ul>
+              <li>Clear messaging: "You'll have a 24-hour period to reverse this change."</li>
+              <li>System-level support for rolling back recent asset connections.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results -->
+      <section>
+        <div class="section-label">Results</div>
+        <h2>A dramatic turnaround in user success.</h2>
+        <p class="section-intro">
+          Post-redesign usability testing showed a complete reversal of the initial findings.
+          Users were not only completing tasks; they were doing so quickly and with confidence.
+        </p>
+
+        <div class="results-grid">
+          <div class="result-block">
+            <div class="result-label">Metric 1: Task success rate</div>
+            <div class="result-before-after">
+              <span class="before-value">25% (2/6)</span>
+              <span style="font-size:11px; color:#9ca3af;">→</span>
+              <span class="after-value">100% (6/6)</span>
+            </div>
+            <div class="result-note">
+              4× improvement: all participants successfully completed the technical setup after the redesign.
+            </div>
+          </div>
+          <div class="result-block">
+            <div class="result-label">Metric 2: Avg. completion time</div>
+            <div class="result-before-after">
+              <span class="before-value">~48 min</span>
+              <span style="font-size:11px; color:#9ca3af;">→</span>
+              <span class="after-value">~12 min</span>
+            </div>
+            <div class="result-note">
+              75% reduction in time: flows that previously took nearly an hour now completed in under 15 minutes.
+            </div>
+          </div>
+          <div class="result-block">
+            <div class="result-label">Metric 3: Navigation confusion</div>
+            <div class="result-before-after">
+              <span class="before-value">100%</span>
+              <span style="font-size:11px; color:#9ca3af;">→</span>
+              <span class="after-value">0%</span>
+            </div>
+            <div class="result-note">
+              Reports of "feeling lost" dropped to zero during post-launch usability checks.
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px;">
+          <div class="eyebrow">Clarity drives growth</div>
+          <p style="font-size:13px; color:var(--text-sub);">
+            Once setup barriers were removed and measurement issues resolved, improved user experience
+            correlated with higher advertising investment across all segments.
+          </p>
+
+          <table class="impact-table">
+            <thead>
+              <tr>
+                <th>User group</th>
+                <th>Before</th>
+                <th>After</th>
+                <th>Growth</th>
+                <th>Primary driver</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Target segment (Start-ups)</td>
+                <td>¥0.45M</td>
+                <td>¥1.5M</td>
+                <td class="impact-growth">3.3×</td>
+                <td>Removing setup barriers.</td>
+              </tr>
+              <tr>
+                <td>Intermediate (B2B / SaaS)</td>
+                <td>¥0.5M</td>
+                <td>¥1.0M</td>
+                <td class="impact-growth">2.0×</td>
+                <td>Fixing measurement issues.</td>
+              </tr>
+              <tr>
+                <td>Agency (experts)</td>
+                <td>¥13.0M</td>
+                <td>¥15.6M</td>
+                <td class="impact-growth">1.2×</td>
+                <td>Optimizing management tools.</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>¥14.0M</strong></td>
+                <td><strong>¥18.1M</strong></td>
+                <td class="impact-growth">+30%</td>
+                <td>Combined effect across all segments.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top:8px; font-size:12px; color:var(--accent-green);">
+            Overall increase in total ad spend
+            <span class="badge-pill">+30%</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Lessons & Future -->
+      <section>
+        <div class="section-label">Reflection</div>
+        <h2>Key lessons and future opportunities.</h2>
+        <p class="section-intro">
+          Beyond immediate metrics, the project highlighted broader truths about designing for complex systems.
+        </p>
+
+        <div class="lessons-row">
+          <div class="lesson">
+            <div class="lesson-number">1</div>
+            <div class="lesson-title">Terminology is a persistent barrier.</div>
+            <p>
+              Even with a clearer UI, Meta-specific terms like "Asset" or "Catalog" remained difficult.
+              Layout and wording need to be designed together to reduce cognitive load.
+            </p>
+          </div>
+          <div class="lesson">
+            <div class="lesson-number">2</div>
+            <div class="lesson-title">Fear of irreversible actions is real.</div>
+            <p>
+              Users' anxiety stayed high even once the process became clearer. Designing for confidence means
+              acknowledging and directly addressing this fear.
+            </p>
+          </div>
+          <div class="lesson">
+            <div class="lesson-number">3</div>
+            <div class="lesson-title">Self-service must handle complex migrations.</div>
+            <p>
+              Users with legacy setups still required human support, revealing a gap in self-service for
+              non-standard cases and migration paths.
+            </p>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-top:22px;">
+          <div class="card">
+            <div class="eyebrow">Proposed backend enhancements</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              To avoid depending solely on manual cleanup, the system could proactively suggest
+              account hygiene actions: automatic archiving for unused assets, and a "forced ownership
+              request" flow when an administrator is absent.
+            </p>
+          </div>
+          <div class="card">
+            <div class="eyebrow">Designing a true sandbox</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              Confidence can be strengthened by letting users simulate the post-migration state inside Meta
+              tools themselves. A full sandbox environment paired with robust undo would let marketers explore
+              options without fear.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outro -->
+      <section class="outro">
+        <div>
+          <h3>From a labyrinth to a launchpad.</h3>
+          <p>
+            By untangling complexity and designing for confidence, we turned a frustrating setup barrier into
+            a clear starting point for growth. The case study demonstrates that investing in clarity for users
+            is a direct investment in the success of the platform.
+          </p>
+          <div class="rocket-line">
+            <div class="rocket"></div>
+          </div>
+        </div>
+        <div>
+          <p class="outro-links">
+            📧 Contact: <em>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aad3c5dfd887cfc7cbc3c6eacfd2cbc7dac6cf84c9c5c7">[email&#160;protected]</a>]</em><br />
+            💼 LinkedIn: <em>[linkedin.com/in/your-profile]</em><br />
+            🌐 Portfolio: <em>[your-portfolio-url.com]</em>
+          </p>
+          <p class="outro-links" style="margin-top:10px;">
+            This HTML page is designed to be printed or exported as a PDF as part of a UX portfolio.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========== JAPANESE VERSION ========== -->
+    <div id="lang-ja">
+      <!-- Hero -->
+      <header class="hero">
+        <div>
+          <div class="hero-title">
+            こんがらがった結び目をほどく：Meta 広告マネージャー UX ケーススタディ
+          </div>
+          <div class="hero-subtitle">
+            ビジネスアセット管理における「混乱」から「見通しの良さ」へユーザーを導く。
+          </div>
+
+          <div class="hero-meta">
+            <span>ロール：UX デザイナー / リサーチャー</span>
+            <span>フォーカス：ビジネス設定とユーザーの安心感</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <img src="from-knot-to-clear-path.png" alt="From knot to clear path visualization" class="hero-image">
+        </div>
+      </header>
+
+      <!-- Interactive Mockup Section (Japanese) -->
+      <section>
+        <div class="section-label">インタラクティブプロトタイプ</div>
+        <h2>改善されたインターフェースを体験</h2>
+        <p class="section-intro">
+          リサーチで特定されたコアペインポイントに対処した、再設計されたMeta広告マネージャーのインターフェースを試してください。
+          プロトタイプでは、新しいアカウント階層の可視化、ガイド付きセットアップフロー、改善されたアセット管理を実演しています。
+        </p>
+
+        <div class="mockup-section">
+          <div class="mockup-demo">
+            <img src="meta_case_study_anime.gif" alt="Meta 広告マネージャー リデザインデモ" />
+          </div>
+          
+          <p style="font-size: 14px; color: var(--text-sub); margin-bottom: 16px;">
+            👆 新しいデザインがビジネスアセット接続プロセスをどのように簡素化するかをご覧ください
+          </p>
+
+          <a href="https://grant-heave-65328644.figma.site" target="_blank" class="cta-button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+            </svg>
+            インタラクティブプロトタイプを試す
+          </a>
+
+          <br/>
+          <p style="font-size: 12px; color: var(--text-sub); margin-top: 12px;">
+            💡 改善されたユーザーフローを実演するインタラクティブプロトタイプです
+          </p>
+        </div>
+      </section>
+
+      <!-- Problem (Japanese) -->
+      <section>
+        <div class="section-label">課題</div>
+        <h2>「広告を出すまで」の道のりが迷路のように感じられていた。</h2>
+        <p class="section-intro">
+          広告マネージャーでキャンペーンを作ること自体は、それほど難しくありません。
+          しかし、そこにたどり着くまでの「ビジネスポートフォリオ」「広告アカウント」「ページ」
+          「ピクセル」「カタログ」のつながりはとても見えにくく、この「見えない構造」が
+          ユーザーの大きなストレス源になっていました。中級レベルのユーザーでさえ、
+          キャンペーン作成画面にたどり着く前に離脱していました。
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="eyebrow">ペルソナ</div>
+            <div class="persona-name">複雑さのせいで足踏みしている、Hana さん。</div>
+            <div class="persona-role">Shopify でセレクトショップを運営するスモールビジネスオーナー。</div>
+
+            <p class="list-header">Goal（達成したいこと）</p>
+            <ul>
+              <li>Shopify の商品カタログを Facebook / Instagram と正しく連携したい。</li>
+              <li>適切なページ・アカウント・ピクセルを紐づけて、安心して広告を配信したい。</li>
+            </ul>
+
+            <p class="list-header">Core frustration（核心のフラストレーション）</p>
+            <p class="quote">
+              <strong>「広告を出したいだけなのに…」</strong>  
+              設定画面の海で迷子になり、「取り返しのつかない操作」をしてしまうのが怖い。
+              Help Center の記事も自分のケースにぴったり当てはまらないと感じている。
+            </p>
+          </div>
+
+          <div>
+            <div class="card card-soft">
+              <div class="eyebrow">初期ユーザビリティテスト（6 名）</div>
+              <p style="font-size:13px; color:var(--text-sub);">
+                中級レベルの広告主 6 名に対し、オンラインで画面共有しながら、
+                ビジネスアセットを接続し基本設定を完了するタスクを依頼しました。
+              </p>
+
+              <div class="metrics-row">
+                <div class="metric">
+                  <div class="metric-label">タスク完了率</div>
+                  <div class="metric-value">25%</div>
+                  <div class="metric-note">6 名中 2 名しか、すべての設定タスクを完了できませんでした。</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">平均所要時間</div>
+                  <div class="metric-value">約 48 分</div>
+                  <div class="metric-note">本来 10〜15 分で終わるはずのフローが、ほぼ 1 時間かかっていました。</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">ナビゲーションの迷い</div>
+                  <div class="metric-value">100%</div>
+                  <div class="metric-note">全員がどこにいるか分からなくなり、一時停止や行き止まりが発生しました。</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">SUS スコア</div>
+                  <div class="metric-value">30〜40</div>
+                  <div class="metric-note">体験は一貫して「しんどい」「イライラする」と表現されました。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pain map (Japanese) -->
+      <section>
+        <div class="section-label">ペインポイント</div>
+        <h2>「見えない構造」が、ユーザーにはっきりした痛みとして現れていた。</h2>
+        <p class="section-intro">
+          リサーチの結果、摩擦の多くはキャンペーン画面そのものではなく、
+          システムの「構造の理解」に起因していることが分かりました。
+          特に以下の 4 つのパターンが繰り返し観測されました。
+        </p>
+
+        <div class="pain-grid">
+          <div class="card">
+            <div class="pain-title">階層が分かりにくい</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              「ビジネスマネージャー（ポートフォリオ）」と「広告アカウント」の違いを
+              自分の言葉で説明できないユーザーが多数。
+              どの階層を触れば問題が解決するのか分かりません。
+            </p>
+          </div>
+          <div class="card">
+            <div class="pain-title">アセットの紐付けが見えない</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              どのページ・ピクセル・カタログ・Instagram アカウントが、
+              どのビジネスに紐づいているか一目で分からない。
+              「このページは別のビジネスに所有されています」といったエラーが突然出てきます。
+            </p>
+          </div>
+          <div class="card">
+            <div class="pain-title">権限管理の複雑さ</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              パートナーやデザイナーを追加するだけでも、多数の画面を行き来する必要があります。
+              「権限を与えすぎていないか」「逆に足りないのか」常に不安を感じていました。
+            </p>
+          </div>
+          <div class="card">
+            <div class="pain-title">取り返しがつかないという恐怖</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              一度アセットを接続すると「二度と戻せない」と信じているユーザーも多く、
+              その恐怖が原因で、重要なタイミングで操作を諦めてしまうことがありました。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- User Flow Diagram (Japanese) -->
+      <section>
+        <div class="section-label">ユーザーフロー</div>
+        <h2>再設計されたフロー：ログインからキャンペーン開始まで</h2>
+        <p class="section-intro">
+          新しいユーザーフローは各段階でペインポイントに対処しています。特に二段階認証の改善
+          （認証アプリ推奨を含む）、広告アカウント接続が見えるビジネスポートフォリオ選択、
+          そして効率化されたアセット検証に焦点を当てています。
+        </p>
+
+        <div class="flow-diagram">
+          <h3 style="text-align: center; margin-bottom: 16px; color: var(--accent-blue);">完全なユーザージャーニーマップ</h3>
+          <p style="text-align: center; font-size: 13px; color: var(--text-sub); margin-bottom: 20px;">
+            2FA から Advantage+ ショッピングキャンペーン作成（Shopify 連携含む）まで
+          </p>
+          
+          <!-- Simplified visual representation (Japanese) -->
+          <div style="background: #f8f9fc; padding: 24px; border-radius: 12px; border: 2px dashed var(--border);">
+            <div style="display: flex; flex-direction: column; gap: 16px; max-width: 900px; margin: 0 auto;">
+              
+              <!-- Stage 1 -->
+              <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-blue);">
+                <strong style="color: var(--accent-blue);">ステージ1：認証</strong>
+                <p style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">
+                  ログイン → 2FA（SMS/メール/認証アプリ）→ <span style="color: var(--accent-green); font-weight: 600;">✓ 認証完了</span>
+                </p>
+                <p style="font-size: 11px; color: var(--accent-orange); margin-top: 4px;">
+                  ⭐ 改善ポイント：認証アプリを信頼性のため推奨
+                </p>
+              </div>
+
+              <!-- Stage 2 -->
+              <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-blue);">
+                <strong style="color: var(--accent-blue);">ステージ2：ビジネス選択</strong>
+                <p style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">
+                  ビジネス一覧 → 接続された広告アカウント＆ID表示 → ビジネス選択 → <span style="color: var(--accent-green); font-weight: 600;">✓ ビジネス選択完了</span>
+                </p>
+                <p style="font-size: 11px; color: var(--accent-orange); margin-top: 4px;">
+                  ⭐ 改善ポイント：選択前に広告アカウント詳細が見える
+                </p>
+              </div>
+
+              <!-- Stage 3 -->
+              <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-blue);">
+                <strong style="color: var(--accent-blue);">ステージ3：アセット検証</strong>
+                <p style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">
+                  Pixel 確認 → Instagram 検証 → カタログ確認 → <span style="color: var(--accent-green); font-weight: 600;">✓ アセット準備完了</span>
+                </p>
+                <p style="font-size: 11px; color: var(--accent-orange); margin-top: 4px;">
+                  ⭐ 改善ポイント：ツリービューでアセット関係を表示
+                </p>
+              </div>
+
+              <!-- Stage 4 -->
+              <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-blue);">
+                <strong style="color: var(--accent-blue);">ステージ4：Shopify 連携</strong>
+                <p style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">
+                  Meta アプリインストール → ビジネス接続 → カタログ同期 → <span style="color: var(--accent-green); font-weight: 600;">✓ Shopify 接続完了</span>
+                </p>
+                <p style="font-size: 11px; color: var(--accent-orange); margin-top: 4px;">
+                  ⭐ 改善ポイント：事前チェックでエラー防止
+                </p>
+              </div>
+
+              <!-- Stage 5 -->
+              <div style="background: white; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent-green);">
+                <strong style="color: var(--accent-green);">ステージ5：キャンペーン作成</strong>
+                <p style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">
+                  Advantage+ キャンペーン作成 → 予算設定 → 確認 → <span style="color: var(--accent-green); font-weight: 600;">🎉 キャンペーン開始！</span>
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <p style="text-align: center; font-size: 12px; color: var(--text-sub); margin-top: 16px;">
+            📊 <a href="user_flow_diagram.html" style="color: var(--accent-blue);" target="_blank">詳細フローチャート図を見る</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- Continue with remaining Japanese sections... -->
+      <!-- For brevity, I'll add a note that the rest follows the same pattern -->
+      
+      <section>
+        <div class="section-label">プロセス</div>
+        <h2>あいまいさから検証済みのソリューションへ ― ユーザー中心の 4 ステップ。</h2>
+        <p class="section-intro">
+          これらの課題に対処するため、定性・定量のリサーチとプロトタイピングを組み合わせた
+          4 段階のプロセスを採用しました。
+        </p>
+
+        <div class="process-row">
+          <div class="process-step">
+            <div class="step-icon">1</div>
+            <div>
+              <strong>Research</strong>
+              <span>オンラインサポート / インタビューとユーザビリティテストで行動と画面遷移を観察。</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-icon">2</div>
+            <div>
+              <strong>Define</strong>
+              <span>定性・定量データをペインテーマ・ペルソナ・インサイトに整理。</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-icon">3</div>
+            <div>
+              <strong>Design</strong>
+              <span>情報設計とナビゲーション改善の方向性を、低解像度ワイヤーで素早く検討。</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-icon">4</div>
+            <div>
+              <strong>Validate</strong>
+              <span>プロトタイプを用いた追加テストで、改善点と抜け漏れを検証。</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Principles (Japanese) -->
+      <section>
+        <div class="section-label">デザイン原則</div>
+        <h2>混乱を「見える化」と「ガイド」に変える 3 つの原則。</h2>
+        <p class="section-intro">
+          単に UI をきれいにするだけでは不十分でした。
+          ユーザーがシステムをどう理解し、どう移動するかという「メンタルモデル」そのものを
+          変える必要があります。そこで次の 3 つを原則としました。
+        </p>
+
+        <div class="principles-row">
+          <div class="card">
+            <div class="principle-title">1. 見えない階層を可視化する</div>
+            <div class="before-after">
+              <span class="before-label">Before</span>
+              <span>アセット同士の関係を、ユーザーが頭の中だけで想像するしかありませんでした。</span>
+              <span class="after-label">After</span>
+              <span>ビジネスツリー図によって、ビジネス／広告アカウント／アセットの関係性を一目で把握できるようにしました。</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="principle-title">2. 問題解決の道筋をガイドする</div>
+            <div class="before-after">
+              <span class="before-label">Before</span>
+              <span>どこから手をつければよいか分からず、複数のツールやタブを行き来していました。</span>
+              <span class="after-label">After</span>
+              <span>ステップごとの診断フローで、あいまいなエラーを「順番に解決できるタスクリスト」に変換しました。</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="principle-title">3. 行き止まりのエラーをなくす</div>
+            <div class="before-after">
+              <span class="before-label">Before</span>
+              <span>「権限がありません」のようなメッセージだけで、次に何をすれば良いか分かりませんでした。</span>
+              <span class="after-label">After</span>
+              <span>すべてのエラーステートに「Fix（解決）」アクションを付与し、ブロッカーをそのままタスクに変えました。</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Transformation (Japanese) -->
+      <section>
+        <div class="section-label">変化</div>
+        <h2>「ごちゃごちゃしたダッシュボード」から「地図とチェックリスト」へ。</h2>
+        <p class="section-intro">
+          以前のダッシュボードは、レコメンデーションや数値は出るものの、
+          アセット同士がどうつながっているかはほとんど示していませんでした。
+          新しいビューでは、セットアップ全体を「地図」と「チェックリスト」として再定義しました。
+        </p>
+
+        <div class="ba-row">
+          <div class="card ba-panel">
+            <div class="ba-tag">Before</div>
+            <h4>断片的なオーバービュー</h4>
+            <p style="font-size:13px; color:var(--text-sub);">
+              アセットの状態は複数のツールに分散しており、
+              どのビジネスポートフォリオ・広告アカウント・ページ・ピクセル・カタログが
+              セットで動いているのかを、一箇所で確認することができませんでした。
+            </p>
+          </div>
+          <div class="card ba-panel">
+            <div class="ba-tag after">After</div>
+            <h4>Business connections map（接続マップ）</h4>
+            <ul>
+              <li><strong>ツリービュー</strong>で、ビジネスポートフォリオ・現在の広告アカウント・紐づくアセットの関係を一望できます。</li>
+              <li><strong>「Fix」フロー</strong>により、複数のエラーを 1 つの入口から優先度付きチェックリストとして解決できます。</li>
+              <li><strong>平易なステータス表現</strong>で、「Ready」「Needs attention」「Not connected」のように状況が直感的に分かります。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Confidence (Japanese) -->
+      <section>
+        <div class="section-label">Confidence</div>
+        <h2>「完了させる」だけでなく、「安心して進められる」状態をデザインする。</h2>
+        <p class="section-intro">
+          テストを通じて分かったのは、ユーザーは「分からない」だけでなく、
+          <em>取り返しのつかないミスをするのが怖い</em> という心理的ハードルを強く感じていることでした。
+          これを解消するために、新しい安全装置を検討しました。
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="eyebrow">Sandbox（サンドボックス）の必要性</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              多くの参加者が、「本番に反映されない安全な環境で試したい」と語りました。
+              そこで、実アカウントを複製した「シミュレーションモード」のコンセプトを検討しました。
+            </p>
+            <ul>
+              <li>実環境とほぼ同じ画面だが、明確に「Simulation」とラベル表示。</li>
+              <li>さまざまなアセットの組み合わせを、本番に影響を与えず試すことができます。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="eyebrow">Undo を一級機能として扱う</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              「後戻りできないかもしれない」という不安を減らすため、
+              サンドボックスに加えて、時間制限付きの Undo 機能をペアで検討しました。
+            </p>
+            <ul>
+              <li>「この変更は 24 時間以内であれば元に戻せます」といった明確なメッセージ。</li>
+              <li>最近行われたアセット接続を、システムレベルでロールバックできる仕組み。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results (Japanese) -->
+      <section>
+        <div class="section-label">成果</div>
+        <h2>ユーザーの成功体験は、数字にもはっきり表れた。</h2>
+        <p class="section-intro">
+          リデザイン後のユーザビリティテストでは、初期テストとは真逆の結果が得られました。
+          ユーザーはタスクを完了できるだけでなく、短時間かつ自信を持って操作できるようになりました。
+        </p>
+
+        <div class="results-grid">
+          <div class="result-block">
+            <div class="result-label">指標 1：タスク完了率</div>
+            <div class="result-before-after">
+              <span class="before-value">25%（2/6）</span>
+              <span style="font-size:11px; color:#9ca3af;">→</span>
+              <span class="after-value">100%（6/6）</span>
+            </div>
+            <div class="result-note">
+              4 倍の改善：すべての参加者が、技術的なセットアップタスクを完了できました。
+            </div>
+          </div>
+          <div class="result-block">
+            <div class="result-label">指標 2：平均完了時間</div>
+            <div class="result-before-after">
+              <span class="before-value">約 48 分</span>
+              <span style="font-size:11px; color:#9ca3af;">→</span>
+              <span class="after-value">約 12 分</span>
+            </div>
+            <div class="result-note">
+              75% の短縮：ほぼ 1 時間かかっていたフローが、15 分以内で完了できるようになりました。
+            </div>
+          </div>
+          <div class="result-block">
+            <div class="result-label">指標 3：ナビゲーションの迷い</div>
+            <div class="result-before-after">
+              <span class="before-value">100%</span>
+              <span style="font-size:11px; color:#9ca3af;">→</span>
+              <span class="after-value">0%</span>
+            </div>
+            <div class="result-note">
+              「どこにいるか分からない」という発言は、リデザイン後のテストでは一度も出ませんでした。
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px;">
+          <div class="eyebrow">Clarity は Growth につながる</div>
+          <p style="font-size:13px; color:var(--text-sub);">
+            セットアップの障壁と計測の問題が解消されると、UX の改善はそのまま
+            すべてのセグメントでの広告投資の増加につながりました。
+          </p>
+
+          <table class="impact-table">
+            <thead>
+              <tr>
+                <th>ユーザーグループ</th>
+                <th>Before</th>
+                <th>After</th>
+                <th>Growth</th>
+                <th>主なドライバー</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ターゲット（スタートアップ）</td>
+                <td>¥0.45M</td>
+                <td>¥1.5M</td>
+                <td class="impact-growth">3.3×</td>
+                <td>セットアップ障壁の解消。</td>
+              </tr>
+              <tr>
+                <td>中級（B2B / SaaS）</td>
+                <td>¥0.5M</td>
+                <td>¥1.0M</td>
+                <td class="impact-growth">2.0×</td>
+                <td>計測まわりの不具合解消。</td>
+              </tr>
+              <tr>
+                <td>代理店（エキスパート）</td>
+                <td>¥13.0M</td>
+                <td>¥15.6M</td>
+                <td class="impact-growth">1.2×</td>
+                <td>管理ツールの効率向上。</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>¥14.0M</strong></td>
+                <td><strong>¥18.1M</strong></td>
+                <td class="impact-growth">+30%</td>
+                <td>すべてのセグメントでの改善の合計。</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top:8px; font-size:12px; color:var(--accent-green);">
+            広告費のトータルは
+            <span class="badge-pill">+30%</span>
+            増加しました。
+          </div>
+        </div>
+      </section>
+
+      <!-- Lessons & Future (Japanese) -->
+      <section>
+        <div class="section-label">振り返り</div>
+        <h2>複雑なプロダクトから学んだことと、今後の余地。</h2>
+        <p class="section-intro">
+          目先の数値だけでなく、「複雑なシステムをどうデザインするか」という、より大きな学びもありました。
+        </p>
+
+        <div class="lessons-row">
+          <div class="lesson">
+            <div class="lesson-number">1</div>
+            <div class="lesson-title">用語の難しさは、常に残り続ける。</div>
+            <p>
+              UI が分かりやすくなっても、「アセット」「カタログ」といった Meta 固有の言葉は
+              依然としてハードルになっていました。情報設計とライティングを一体で考える必要があります。
+            </p>
+          </div>
+          <div class="lesson">
+            <div class="lesson-number">2</div>
+            <div class="lesson-title">「戻れないかもしれない」という恐怖は本物。</div>
+            <p>
+              フローが理解しやすくなっても、ユーザーの不安はすぐには消えません。
+              真の意味で「安心して進められる」体験をつくるには、この恐怖を前提として設計する必要があります。
+            </p>
+          </div>
+          <div class="lesson">
+            <div class="lesson-number">3</div>
+            <div class="lesson-title">レガシーケースを扱えるセルフサービスが必要。</div>
+            <p>
+              複雑な過去設定を抱えたユーザーは、依然として人によるサポートを必要としました。
+              これは「移行シナリオ」をセルフサービスでどう扱うか、という今後の課題も示しています。
+            </p>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-top:22px;">
+          <div class="card">
+            <div class="eyebrow">バックエンド改善の提案</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              手動対応に頼り切らないために、システム側から「アカウント衛生」のアクションを提案する仕組みが考えられます。
+              例：長期間使われていないアセットの自動アーカイブや、
+              管理者不在時の「所有権リクエスト」フローなど。
+            </p>
+          </div>
+          <div class="card">
+            <div class="eyebrow">本格的なサンドボックス設計</div>
+            <p style="font-size:13px; color:var(--text-sub);">
+              Meta ツールの中で、移行後の状態を安全にシミュレーションできるようにすることで、
+              ユーザーの自信をさらに高めることができます。
+              強力な Undo と組み合わせたフルサンドボックス環境は、
+              「安心して試せる」体験の重要なピースです。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outro (Japanese) -->
+      <section class="outro">
+        <div>
+          <h3>迷路から、打ち上げ台へ。</h3>
+          <p>
+            複雑さをほどき、「自信」をデザインすることで、
+            これまでのボトルネックだったセットアップ画面を、
+            成長のスタート地点に変えることができました。
+            ユーザーの「分かりやすさ」への投資は、そのままプロダクトの成功への投資であると実感したプロジェクトです。
+          </p>
+          <div class="rocket-line">
+            <div class="rocket"></div>
+          </div>
+        </div>
+        <div>
+          <p class="outro-links">
+            📧 お問い合わせ：<em>[ご自身のメールアドレス]</em><br />
+            💼 LinkedIn：<em>[linkedin.com/in/your-profile]</em><br />
+            🌐 ポートフォリオ：<em>[your-portfolio-url.com]</em>
+          </p>
+          <p class="outro-links" style="margin-top:10px;">
+            この HTML は、ポートフォリオ用に PDF として書き出して使えるように設計しています。
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+
+  <script>
+    const btnEn = document.getElementById('btn-en');
+    const btnJa = document.getElementById('btn-ja');
+    const langEn = document.getElementById('lang-en');
+    const langJa = document.getElementById('lang-ja');
+
+    function switchLang(lang) {
+      if (lang === 'en') {
+        btnEn.classList.add('active');
+        btnJa.classList.remove('active');
+        langEn.style.display = 'block';
+        langJa.style.display = 'none';
+        document.documentElement.lang = 'en';
+      } else {
+        btnJa.classList.add('active');
+        btnEn.classList.remove('active');
+        langJa.style.display = 'block';
+        langEn.style.display = 'none';
+        document.documentElement.lang = 'ja';
+      }
+    }
+
+    btnEn.addEventListener('click', () => switchLang('en'));
+    btnJa.addEventListener('click', () => switchLang('ja'));
+  </script>
+</body>
+</html>
